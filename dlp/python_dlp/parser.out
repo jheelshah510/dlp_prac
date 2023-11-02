@@ -1,0 +1,148 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    ID
+
+Grammar
+
+Rule 0     S' -> S
+Rule 1     S -> i E t S S_prime
+Rule 2     S -> a
+Rule 3     S_prime -> e S
+Rule 4     S_prime -> empty
+Rule 5     E -> b
+Rule 6     empty -> <empty>
+
+Terminals, with rules where they appear
+
+ID                   : 
+a                    : 2
+b                    : 5
+e                    : 3
+error                : 
+i                    : 1
+t                    : 1
+
+Nonterminals, with rules where they appear
+
+E                    : 1
+S                    : 1 3 0
+S_prime              : 1
+empty                : 4
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . S
+    (1) S -> . i E t S S_prime
+    (2) S -> . a
+
+    i               shift and go to state 2
+    a               shift and go to state 3
+
+    S                              shift and go to state 1
+
+state 1
+
+    (0) S' -> S .
+
+
+
+state 2
+
+    (1) S -> i . E t S S_prime
+    (5) E -> . b
+
+    b               shift and go to state 5
+
+    E                              shift and go to state 4
+
+state 3
+
+    (2) S -> a .
+
+    $end            reduce using rule 2 (S -> a .)
+    e               reduce using rule 2 (S -> a .)
+
+
+state 4
+
+    (1) S -> i E . t S S_prime
+
+    t               shift and go to state 6
+
+
+state 5
+
+    (5) E -> b .
+
+    t               reduce using rule 5 (E -> b .)
+
+
+state 6
+
+    (1) S -> i E t . S S_prime
+    (1) S -> . i E t S S_prime
+    (2) S -> . a
+
+    i               shift and go to state 2
+    a               shift and go to state 3
+
+    S                              shift and go to state 7
+
+state 7
+
+    (1) S -> i E t S . S_prime
+    (3) S_prime -> . e S
+    (4) S_prime -> . empty
+    (6) empty -> .
+
+  ! shift/reduce conflict for e resolved as shift
+    e               shift and go to state 9
+    $end            reduce using rule 6 (empty -> .)
+
+  ! e               [ reduce using rule 6 (empty -> .) ]
+
+    S_prime                        shift and go to state 8
+    empty                          shift and go to state 10
+
+state 8
+
+    (1) S -> i E t S S_prime .
+
+    $end            reduce using rule 1 (S -> i E t S S_prime .)
+    e               reduce using rule 1 (S -> i E t S S_prime .)
+
+
+state 9
+
+    (3) S_prime -> e . S
+    (1) S -> . i E t S S_prime
+    (2) S -> . a
+
+    i               shift and go to state 2
+    a               shift and go to state 3
+
+    S                              shift and go to state 11
+
+state 10
+
+    (4) S_prime -> empty .
+
+    e               reduce using rule 4 (S_prime -> empty .)
+    $end            reduce using rule 4 (S_prime -> empty .)
+
+
+state 11
+
+    (3) S_prime -> e S .
+
+    e               reduce using rule 3 (S_prime -> e S .)
+    $end            reduce using rule 3 (S_prime -> e S .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for e in state 7 resolved as shift
